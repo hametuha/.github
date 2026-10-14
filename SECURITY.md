@@ -12,6 +12,8 @@ https://patchstack.com/database/report/wordpress/plugin/{プラグインのス�
 
 Patchstack が報告の検証・CVE の採番・開発者への通知を行います。
 
+Patchstack を使わない場合は、下記「その他のリポジトリ」と同じく GitHub の **Security** タブからも報告できます。
+
 ## その他のリポジトリ
 
 GitHub の非公開報告機能からお知らせください。
@@ -30,7 +32,7 @@ GitHub の非公開報告機能からお知らせください。
 
 Please **do not disclose vulnerabilities publicly**.
 
-- **WordPress plugins:** Report via the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/report) (`https://patchstack.com/database/report/wordpress/plugin/{slug}`).
+- **WordPress plugins:** Report via the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/report) (`https://patchstack.com/database/report/wordpress/plugin/{slug}`), or privately via the **Security** tab of the plugin's repository.
 - **Other repositories:** Report privately via the **Security** tab of the affected repository → **Report a vulnerability**. We will respond within one week.
 
 Fixes are provided for the latest release only.
