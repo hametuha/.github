@@ -12,15 +12,12 @@
 # Project への追加は冪等なので、実行間隔より長い時間を遡っても重複は発生しない。
 set -euo pipefail
 
-OWNER="${OWNER:-hametuha}"
-PROJECT_NUMBER="${PROJECT_NUMBER:-5}"
-TOPIC="${TOPIC:-wordpress-plugin}"
-SINCE="${SINCE:-$(date -u -d '3 hours ago' +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || date -u -v-3H +%Y-%m-%dT%H:%M:%SZ)}"
-DRY_RUN="${DRY_RUN:-0}"
+source "$(dirname "$0")/lib.sh"
+SINCE="${SINCE:-$(ago 3 hours)}"
 
 echo "Target: ${OWNER} repos with topic '${TOPIC}', issues created since ${SINCE}"
 
-repos=$(gh repo list "$OWNER" --topic "$TOPIC" --no-archived --limit 500 --json nameWithOwner --jq '.[].nameWithOwner')
+repos=$(plugin_repos)
 if [ -z "$repos" ]; then
 	echo "No repositories found."
 	exit 0

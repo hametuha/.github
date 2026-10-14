@@ -1,0 +1,32 @@
+name: Weekly plugin report
+
+on:
+  schedule:
+    # 毎週月曜 9:00 JST
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+    inputs:
+      since:
+        description: '集計開始日時（例: 2026-10-01T00:00:00Z）。空なら7日前'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Slackに投稿せずに内容を表示する'
+        type: boolean
+        default: true
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Post weekly report
+        env:
+          GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SINCE: ${{ inputs.since }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '0' }}
+        run: |
+          [ -z "$SINCE" ] && unset SINCE
+          ./scripts/weekly-report.sh

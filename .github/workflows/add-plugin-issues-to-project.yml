@@ -32,3 +32,9 @@ jobs:
         run: |
           [ -z "$SINCE" ] && unset SINCE
           ./scripts/add-plugin-issues-to-project.sh
+
+      - name: Sync status
+        env:
+          GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '0' }}
+        run: ./scripts/sync-project-status.sh
